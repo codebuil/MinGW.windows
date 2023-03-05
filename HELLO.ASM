@@ -13,7 +13,7 @@ start:
         call [ExitProcess]
 
 section '.rdata' data readable
-        hello db 27,'c',27,'[44;30mHello world!', 10, 0
+        hello db 27,'c',27,'[44;30mHello world!', 13,10, 0
 
 section '.idata' data readable import
         library kernel32, 'kernel32.dll', \
