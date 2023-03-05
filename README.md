@@ -1,3 +1,3 @@
-# fasm.hello64
-fasm a asm window in 64 bits 
-my blu window
+# fasm.hello
+fasm a asm window 32
+
