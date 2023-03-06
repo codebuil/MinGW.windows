@@ -1,3 +1,4 @@
-# fasm.hello
-fasm a asm window 32
+# minGW windows
+my windown
+
 
