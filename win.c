@@ -1,9 +1,16 @@
 #include <windows.h>
-
+//./gcc -o minha_janela.exe win.c -mwindows
 // Protótipo da função de janela
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 #include <windows.h>
+const int WIDTH = 640;
+const int HEIGHT = 480;
+
+void DesenharLinha(HDC hdc, int x1, int y1, int x2, int y2) {
+    MoveToEx(hdc, x1, y1, NULL);
+    LineTo(hdc, x2, y2);
+}
 
 // Protótipo da função de janela
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -13,9 +20,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     // Define as informações da janela
     const char* CLASS_NAME = "MinhaJanela";
     const char* WINDOW_NAME = "Minha Janela";
-    const int WIDTH = 640;
-    const int HEIGHT = 480;
-
+    
     // Registra a classe da janela
     WNDCLASS wc = {0};
     wc.lpfnWndProc = WndProc;
@@ -51,6 +56,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             GetClientRect(hwnd, &rc);
             HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 255)); // Cria uma escova sólida com a cor azul
             FillRect(hdc, &rc, hBrush); // Pinta o retângulo com a cor azul
+            DesenharLinha(hdc, 0, 0, WIDTH, HEIGHT);
+             DesenharLinha(hdc, WIDTH,0,0 ,HEIGHT);
             DeleteObject(hBrush); // Libera a memória da escova
             EndPaint(hwnd, &ps);
             break;
