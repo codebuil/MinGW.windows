@@ -7,10 +7,63 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 const int WIDTH = 640;
 const int HEIGHT = 480;
 
-void DesenharLinha(HDC hdc, int x1, int y1, int x2, int y2) {
+#include <windows.h>
+
+void draw_cube(HDC hdc, int x, int y, int z, int size)
+{
+    // Define as coordenadas dos oito vértices do cubo
+    int x1 = x;
+    int y1 = y;
+    int z1 = z;
+    int x2 = x + size;
+    int y2 = y;
+    int z2 = z;
+    int x3 = x + size;
+    int y3 = y + size;
+    int z3 = z;
+    int x4 = x;
+    int y4 = y + size;
+    int z4 = z;
+    int x5 = x;
+    int y5 = y;
+    int z5 = z + size;
+    int x6 = x + size;
+    int y6 = y;
+    int z6 = z + size;
+    int x7 = x + size;
+    int y7 = y + size;
+    int z7 = z + size;
+    int x8 = x;
+    int y8 = y + size;
+    int z8 = z + size;
+
+    // Desenha as 12 linhas que formam as arestas do cubo
     MoveToEx(hdc, x1, y1, NULL);
     LineTo(hdc, x2, y2);
+    MoveToEx(hdc, x2, y2, NULL);
+    LineTo(hdc, x3, y3);
+    MoveToEx(hdc, x3, y3, NULL);
+    LineTo(hdc, x4, y4);
+    MoveToEx(hdc, x4, y4, NULL);
+    LineTo(hdc, x1, y1);
+    MoveToEx(hdc, x5, y5, NULL);
+    LineTo(hdc, x6, y6);
+    MoveToEx(hdc, x6, y6, NULL);
+    LineTo(hdc, x7, y7);
+    MoveToEx(hdc, x7, y7, NULL);
+    LineTo(hdc, x8, y8);
+    MoveToEx(hdc, x8, y8, NULL);
+    LineTo(hdc, x5, y5);
+    MoveToEx(hdc, x1, y1, NULL);
+    LineTo(hdc, x5, y5);
+    MoveToEx(hdc, x2, y2, NULL);
+    LineTo(hdc, x6, y6);
+    MoveToEx(hdc, x3, y3, NULL);
+    LineTo(hdc, x7, y7);
+    MoveToEx(hdc, x4, y4, NULL);
+    LineTo(hdc, x8, y8);
 }
+
 
 // Protótipo da função de janela
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -59,17 +112,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             FillRect(hdc, &rc, hBrush); // Pinta o retângulo com a cor azul
             SelectObject(hdc, GetStockObject(BLACK_PEN));
 
-        for (i = 0; i <= WIDTH; i += 10)
-        {
-            MoveToEx(hdc, i, 0, NULL);
-            LineTo(hdc, i, HEIGHT);
-        }
-
-        for (i = 0; i <= HEIGHT; i += 10)
-        {
-            MoveToEx(hdc, 0, i, NULL);
-            LineTo(hdc, WIDTH, i);
-        }
+            draw_cube(hdc,10,10,10,200);
  
             DeleteObject(hBrush); // Libera a memória da escova
             EndPaint(hwnd, &ps);
