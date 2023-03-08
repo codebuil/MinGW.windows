@@ -48,6 +48,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 // Função de janela
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    int i=0,x,y;
     switch (msg) {
         case WM_PAINT: {
             PAINTSTRUCT ps;
@@ -56,8 +57,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             GetClientRect(hwnd, &rc);
             HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 255)); // Cria uma escova sólida com a cor azul
             FillRect(hdc, &rc, hBrush); // Pinta o retângulo com a cor azul
-            DesenharLinha(hdc, 0, 0, WIDTH, HEIGHT);
-             DesenharLinha(hdc, WIDTH,0,0 ,HEIGHT);
+            SelectObject(hdc, GetStockObject(BLACK_PEN));
+
+        for (i = 0; i <= WIDTH; i += 10)
+        {
+            MoveToEx(hdc, i, 0, NULL);
+            LineTo(hdc, i, HEIGHT);
+        }
+
+        for (i = 0; i <= HEIGHT; i += 10)
+        {
+            MoveToEx(hdc, 0, i, NULL);
+            LineTo(hdc, WIDTH, i);
+        }
+ 
             DeleteObject(hBrush); // Libera a memória da escova
             EndPaint(hwnd, &ps);
             break;
